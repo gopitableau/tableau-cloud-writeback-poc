@@ -314,17 +314,24 @@
 
             try {
 
-                const response = await 
-				fetch("https://script.google.com/macros/s/AKfycbyhZD5XP1lxigouPIhTZHRLsO3t1DXs2iJc_6ZA4sl-GDTUmOzuCEJ65f_U_lWcFDSF/exec", {
+                const response = await fetch(
+                    "https://script.google.com/macros/s/AKfycbyhZD5XP1lxigouPIhTZHRLsO3t1DXs2iJc_6ZA4sl-GDTUmOzuCEJ65f_U_lWcFDSF/exec",
+                    {
                         method: "POST",
 
+                        /*
+                         * Use text/plain instead of
+                         * application/json to avoid
+                         * a CORS preflight request.
+                         */
+
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "text/plain"
                         },
 
                         body: JSON.stringify({
 
-                            region: "Not specified",
+                            user: "Gopi",
 
                             feedback_type: type,
 
@@ -338,6 +345,12 @@
 
                 const result =
                     await response.json();
+
+
+                console.log(
+                    "Apps Script response:",
+                    result
+                );
 
 
                 if (response.ok) {
@@ -372,7 +385,10 @@
 
             catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Submit error:",
+                    error
+                );
 
                 status.innerText =
                     "Connection error.";
