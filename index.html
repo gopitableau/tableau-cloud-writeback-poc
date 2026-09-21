@@ -2,8 +2,8 @@ document
     .getElementById("openFeedback")
     .addEventListener("click", () => {
 
-        const popupUrl =
-            new URL("feedback.html", window.location.href).href;
+       const popupUrl =
+    window.location.origin + "/feedback.html";
 
         tableau.extensions.ui
             .displayDialogAsync(
